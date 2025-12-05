@@ -50,7 +50,7 @@ if (!isset($_SESSION['useremail'])) {
 
                             if (!empty($namaFileBaru)) {
                                 $folderTujuan = "dokumen/" . $namaFileBaru;
-                                // Hapus file fisik lama
+                            
                                 if (!empty($file_lama) && file_exists("dokumen/" . $file_lama)) {
                                     unlink("dokumen/" . $file_lama);
                                 }
