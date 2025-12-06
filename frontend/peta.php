@@ -5,11 +5,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="index.php">&larr; Kembali ke Home</a>
-        </div>
-    </nav>
+   <?php include 'includes/frontmenu.php'; ?>
     <div class="container mt-4 text-center">
         <h2>Lokasi Kampus UNTAR</h2>
         <div class="mt-4 border p-2 bg-light">
