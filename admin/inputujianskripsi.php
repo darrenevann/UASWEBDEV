@@ -41,17 +41,13 @@ include "bagiankode/head.php";
                         <?php
                         include("includes/config.php");
 
-                        // --- LOGIC SIMPAN DATA ---
                         if (isset($_POST["Simpan"])) {
                             $mhs_NPM = $_POST['mhsNPM'];
                             $tgl_ujian = $_POST['tglUjian'];
                             $jam_ujian = $_POST['jamUjian'];
-
-                            // Logic Upload Foto (Wajib JPG sesuai soal)
                             $namaFile = $_FILES['fotoUjian']['name'];
                             $lokasiFile = $_FILES['fotoUjian']['tmp_name'];
                             
-                            // Pastikan folder dokumen ada
                             if (!file_exists('dokumen')) {
                                 mkdir('dokumen', 0777, true);
                             }
@@ -59,7 +55,6 @@ include "bagiankode/head.php";
                             $folderTujuan = "dokumen/" . $namaFile;
                             $fileType = strtolower(pathinfo($folderTujuan, PATHINFO_EXTENSION));
 
-                            // Validasi Format JPG/JPEG
                             if (!empty($namaFile) && ($fileType != "jpg" && $fileType != "jpeg")) {
                                 echo "<script>alert('Format file harus JPG atau JPEG!');</script>";
                             } else {
@@ -72,9 +67,6 @@ include "bagiankode/head.php";
                             }
                         }
 
-                        // --- LOGIC PENCARIAN & TAMPIL DATA (RELASI 3 TABEL) ---
-                        // Kita melakuan JOIN ke tabel BIMBINGAN untuk tahu siapa dosennya (sesuai soal)
-                        // DISTINCT digunakan agar jika mahasiswa bimbingan berkali-kali, nama dosen hanya muncul sekali
                         if (isset($_POST["kirim"])) {
                             $search = $_POST["search"];
                             $query = mysqli_query($conn, "SELECT DISTINCT u.*, m.mhs_Nama, d.dosen_Nama 
@@ -104,7 +96,6 @@ include "bagiankode/head.php";
                                                 <select class="form-control select2" name="mhsNPM" required>
                                                     <option value="">-- Pilih Mahasiswa Peserta Ujian --</option>
                                                     <?php
-                                                    // Query mengambil mahasiswa yang ada di tabel BIMBINGAN saja
                                                     $sql_mhs = mysqli_query($conn, "SELECT DISTINCT b.mhs_NPM, m.mhs_Nama 
                                                                                     FROM bimbingan b 
                                                                                     JOIN mahasiswa m ON b.mhs_NPM = m.mhs_NPM");

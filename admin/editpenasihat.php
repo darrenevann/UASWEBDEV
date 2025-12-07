@@ -40,15 +40,13 @@ include "bagiankode/head.php";
                     <?php
                     include("includes/config.php");
 
-                    // Ambil data untuk diedit
+        
                     $NPM = $_GET["ubahpenasihat"];
                     $edit = mysqli_query($conn, "SELECT * FROM penasihat WHERE mhs_NPM= '$NPM'");
                     $row_edit = mysqli_fetch_array($edit);
 
                     $editmhs = mysqli_query($conn, "SELECT * FROM mahasiswa WHERE mhs_NPM='$NPM'");
                     $row_edit2 = mysqli_fetch_array($editmhs);
-
-                    // Logic Update
                     if (isset($_POST['Ubah'])) {
                         $mhs_NPM = $_POST['npmMHS'];
                         $dosen_NIDN = $_POST['nidnDOSEN'];
@@ -58,7 +56,7 @@ include "bagiankode/head.php";
                         $dokumen_tmp = $_FILES['penasihatFILE']['tmp_name'];
 
                         if (!empty($penasihat_FILE)) {
-                            // Jika ada file baru
+        
                             move_uploaded_file($dokumen_tmp, 'images/' . $penasihat_FILE);
                             mysqli_query($conn, "UPDATE penasihat SET 
                                 mhs_NPM='$mhs_NPM', 
@@ -67,7 +65,7 @@ include "bagiankode/head.php";
                                 penasihat_KET='$penasihat_KET' 
                                 WHERE mhs_NPM='$NPM'");
                         } else {
-                            // Jika tidak ganti file
+        
                             mysqli_query($conn, "UPDATE penasihat SET 
                                 mhs_NPM='$mhs_NPM', 
                                 dosen_NIDN='$dosen_NIDN', 
@@ -78,7 +76,7 @@ include "bagiankode/head.php";
                         header("location:inputpenasihat.php");
                     }
 
-                    // Logic Search & Tampil Data
+    
                     if (isset($_POST["kirim"])) {
                         $search = $_POST["search"];
                         $query = mysqli_query($conn, "SELECT * FROM penasihat,dosen,mahasiswa

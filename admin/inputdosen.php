@@ -132,7 +132,6 @@ include "bagiankode/head.php";
                                             <h1 class="display-5">Daftar Dosen</h1>
                                         </div>
 
-                                        <!-- form pencarian -->
                                         <form method="POST">
                                             <div class="form-group row mt-5 mb-3">
                                                 <label for="search" class="col-sm-2">Cari NIDN Dosen</label>

@@ -2,7 +2,7 @@
 <html>
 <?php
 include "bagiankode/head.php"
-?>
+    ?>
 <?php
 ob_start();
 session_start();

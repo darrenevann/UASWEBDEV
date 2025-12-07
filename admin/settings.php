@@ -28,18 +28,14 @@ include "bagiankode/head.php";
                     include("includes/config.php");
                     $userID = $_SESSION['useremail'];
 
-                    // --- PROSES SIMPAN PERUBAHAN ---
                     if (isset($_POST['Simpan'])) {
                         $nama = $_POST['adminNama'];
                         $npm = $_POST['adminNPM'];
 
-                        // Cek Upload Foto
                         $namaFile = $_FILES['adminFoto']['name'];
                         $lokasiFile = $_FILES['adminFoto']['tmp_name'];
 
-                        // Jika user mengupload foto baru
                         if (!empty($namaFile)) {
-                            // Cek folder dokumen
                             if (!file_exists('dokumen')) {
                                 mkdir('dokumen', 0777, true);
                             }
@@ -52,7 +48,6 @@ include "bagiankode/head.php";
                             } else {
                                 move_uploaded_file($lokasiFile, $folderTujuan);
 
-                                // Update Data + Foto
                                 $queryUpdate = mysqli_query($conn, "UPDATE admin SET 
                                     admin_NAME = '$nama',
                                     admin_NPM = '$npm',
@@ -60,7 +55,6 @@ include "bagiankode/head.php";
                                     WHERE admin_USER = '$userID'");
                             }
                         } else {
-                            // Update Data SAJA (Foto lama tidak berubah)
                             $queryUpdate = mysqli_query($conn, "UPDATE admin SET 
                                 admin_NAME = '$nama',
                                 admin_NPM = '$npm'
@@ -73,7 +67,6 @@ include "bagiankode/head.php";
                         }
                     }
 
-                    // --- AMBIL DATA LAMA UNTUK DITAMPILKAN ---
                     $query = mysqli_query($conn, "SELECT * FROM admin WHERE admin_USER = '$userID'");
                     $data = mysqli_fetch_array($query);
                     ?>

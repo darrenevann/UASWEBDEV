@@ -65,7 +65,7 @@ include "bagiankode/head.php";
                                 mhs_KET='$mhs_KET'
                                 WHERE mhs_NPM='$NPM'");
                             
-                            // Redirect kembali ke halaman input/list mahasiswa
+
                             header("location:inputmhs.php");
                         }
 

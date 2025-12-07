@@ -34,15 +34,12 @@ if (!isset($_SESSION['useremail'])) {
                         <?php
                         include("includes/config.php");
 
-                        // --- LOGIC SIMPAN DATA ---
                         if (isset($_POST["Simpan"])) {
                             $mhs_NPM = $_POST['mhsNPM'];
                             $sumber_id = $_POST['sumberID'];
                             $periode_id = $_POST['periodeID'];
                             $nominal = $_POST['nominal'];
-                            $status = "Diajukan"; // Default status
-
-                            // Upload Berkas
+                            $status = "Diajukan"; 
                             $namaFile = $_FILES['berkas']['name'];
                             $lokasiFile = $_FILES['berkas']['tmp_name'];
                             
@@ -63,7 +60,6 @@ if (!isset($_SESSION['useremail'])) {
                             }
                         }
 
-                        // --- LOGIC TAMPIL DATA (JOIN 3 TABEL) ---
                         if (isset($_POST["kirim"])) {
                             $search = $_POST["search"];
                             $query = mysqli_query($conn, "SELECT bp.*, m.mhs_Nama, s.nama_sumber, p.nama_periode

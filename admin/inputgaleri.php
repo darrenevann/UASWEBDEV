@@ -19,7 +19,7 @@ if (!isset($_SESSION['useremail'])) {
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Manajemen Galeri Foto</h1>
+                    <h1 class="mt-4">Manajemen Galeri Foto Alumni</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Dashboard / Galeri</li>
                     </ol>

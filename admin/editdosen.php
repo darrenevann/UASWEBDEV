@@ -61,7 +61,7 @@ include "bagiankode/head.php";
                                     dosen_Ket='$dosen_Ket'
                                 WHERE dosen_NIDN='$NIDN'");
                             
-                            // Redirect kembali ke inputdosen
+                    
                             header("location:inputdosen.php");
                         }
 

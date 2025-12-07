@@ -43,7 +43,7 @@ include "bagiankode/head.php";
 
                         $NPM_original = $_GET['ubahNPM'];
 
-                        // --- LOGIC UPDATE ---
+        
                         if (isset($_POST["Ubah"])) {
                             $mhs_NPM = $_POST['mhs_NPM'];
                             $peserta_SEMT = $_POST['peserta_SEMT'];
@@ -54,12 +54,12 @@ include "bagiankode/head.php";
                             $NPM_original_dari_form = $_POST['NPM_original'];
                             $file_lama = $_POST['file_lama'];
 
-                            // Cek apakah ada file baru
+                
                             if (isset($_FILES['peserta_DOKUMEN']) && $_FILES['peserta_DOKUMEN']['name'] != "") {
                                 $peserta_DOKUMEN = $_FILES['peserta_DOKUMEN']['name'];
                                 $tmp = $_FILES['peserta_DOKUMEN']['tmp_name'];
                                 
-                                // Pastikan folder dokumen ada
+                    
                                 if (!file_exists('dokumen')) {
                                     mkdir('dokumen', 0777, true);
                                 }
@@ -81,8 +81,7 @@ include "bagiankode/head.php";
                             echo "<script>alert('Data berhasil diubah');
                             document.location='inputpeserta.php'</script>";
                         }
-
-                        // --- LOGIC FETCH DATA ---
+                        
                         $query_edit = mysqli_query($conn, "SELECT * FROM peserta WHERE mhs_NPM = '$NPM_original'");
                         $row_edit = mysqli_fetch_array($query_edit);
 

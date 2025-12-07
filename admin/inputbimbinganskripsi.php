@@ -41,25 +41,20 @@ include "bagiankode/head.php";
                         <?php
                         include("includes/config.php");
 
-                        // --- LOGIC SIMPAN DATA ---
                         if (isset($_POST["Simpan"])) {
                             $dosen_NIDN = $_POST['dosenNIDN'];
                             $mhs_NPM = $_POST['mhsNPM'];
                             $tgl_bimbingan = $_POST['tglBimbingan'];
                             $isi_bimbingan = $_POST['isiBimbingan'];
-
-                            // Logic Upload File
                             $namaFile = $_FILES['fileDokumen']['name'];
                             $lokasiFile = $_FILES['fileDokumen']['tmp_name'];
                             
-                            // Pastikan folder dokumen ada
                             if (!file_exists('dokumen')) {
                                 mkdir('dokumen', 0777, true);
                             }
                             
                             $folderTujuan = "dokumen/" . $namaFile;
                             
-                            // Validasi sederhana (PDF only)
                             $fileType = strtolower(pathinfo($folderTujuan, PATHINFO_EXTENSION));
                             
                             if (!empty($namaFile) && $fileType != "pdf") {
@@ -74,17 +69,14 @@ include "bagiankode/head.php";
                             }
                         }
 
-                        // --- LOGIC PENCARIAN & TAMPIL DATA ---
                         if (isset($_POST["kirim"])) {
                             $search = $_POST["search"];
-                            // Query Join dengan pencarian
                             $query = mysqli_query($conn, "SELECT b.*, d.dosen_Nama, m.mhs_Nama 
                                 FROM bimbingan b
                                 JOIN dosen d ON b.dosen_NIDN = d.dosen_NIDN
                                 JOIN mahasiswa m ON b.mhs_NPM = m.mhs_NPM
                                 WHERE m.mhs_Nama LIKE '%$search%' OR b.isi_bimbingan LIKE '%$search%'");
                         } else {
-                            // Query Join standar
                             $query = mysqli_query($conn, "SELECT b.*, d.dosen_Nama, m.mhs_Nama 
                                 FROM bimbingan b
                                 JOIN dosen d ON b.dosen_NIDN = d.dosen_NIDN
@@ -119,20 +111,15 @@ include "bagiankode/head.php";
                                                 <select class="form-control" name="mhsNPM" required>
                                                     <option value="">-- Pilih Mahasiswa (Peserta) --</option>
                                                     <?php
-                                                    // PERBAIKAN LOGIC: Mengambil data dari tabel 'peserta' (sesuai nama file inputpeserta)
-                                                    // Pastikan tabel Anda namanya 'peserta' atau 'peserta_skripsi'
-                                                    // Jika error, ganti 'peserta' di bawah menjadi nama tabel yang benar di database Anda.
                                                     $sql_mhs = mysqli_query($conn, "SELECT p.mhs_NPM, m.mhs_Nama, p.peserta_JUDUL 
                                                                                     FROM peserta p 
                                                                                     JOIN mahasiswa m ON p.mhs_NPM = m.mhs_NPM");
                                                     
-                                                    // Fallback jika tabel peserta belum ada/kosong, ambil dari mahasiswa langsung (opsional)
                                                     if (!$sql_mhs) {
                                                         $sql_mhs = mysqli_query($conn, "SELECT mhs_NPM, mhs_Nama FROM mahasiswa");
                                                     }
 
                                                     while ($row_mhs = mysqli_fetch_array($sql_mhs)) {
-                                                        // Cek apakah kolom judul ada (jika pakai fallback)
                                                         $judul = isset($row_mhs['peserta_JUDUL']) ? " - " . $row_mhs['peserta_JUDUL'] : "";
                                                         echo "<option value='" . $row_mhs['mhs_NPM'] . "'>" . $row_mhs['mhs_Nama'] . $judul . "</option>";
                                                     }

@@ -27,14 +27,12 @@ if(isset($_POST["login"]))
 <body>
 
 <div class="container">
-  <!-- kolom kiri -->
   <div class="kolomkiri col-md-4 text-center">
     <h2>TUGAS AKHIR</h2>
-    <p>My Profile</p>
-    <p>INI UNTUK PROFILE ANDA</p>
+    <p>UAS WEB DEVELOPMENT</p>
+    <p>Darren Evan Nathanael</p>
   </div>
 
-  <!-- kolom kanan -->
   <div class="kolomkanan col-md-8">
     <div class="login-box">
       <h5 class="text-center mb-4">LOGIN</h5>

@@ -34,24 +34,19 @@ if (!isset($_SESSION['useremail'])) {
                         <?php
                         include("includes/config.php");
 
-                        // --- CREATE (SIMPAN DATA) ---
                         if (isset($_POST["Simpan"])) {
                             $kategoriID = $_POST['kategoriID'];
                             $beritaJudul = $_POST['beritaJudul'];
                             $beritaIsi = $_POST['beritaIsi'];
                             $beritaTgl = $_POST['beritaTgl'];
-
-                            // Upload Foto
                             $namaFile = $_FILES['beritaFoto']['name'];
                             $lokasiFile = $_FILES['beritaFoto']['tmp_name'];
                             
-                            // Buat folder jika belum ada
                             if (!file_exists('dokumen')) { mkdir('dokumen', 0777, true); }
                             
                             $folderTujuan = "dokumen/" . $namaFile;
                             $fileType = strtolower(pathinfo($folderTujuan, PATHINFO_EXTENSION));
 
-                            // Validasi Gambar
                             if (!empty($namaFile) && ($fileType != "jpg" && $fileType != "jpeg" && $fileType != "png")) {
                                 echo "<script>alert('File harus format Gambar (JPG/PNG)!');</script>";
                             } else {
@@ -65,7 +60,6 @@ if (!isset($_SESSION['useremail'])) {
                             }
                         }
 
-                        // --- READ (TAMPIL DATA) ---
                         if (isset($_POST["kirim"])) {
                             $search = $_POST["search"];
                             $query = mysqli_query($conn, "SELECT b.*, k.kategoriNama 

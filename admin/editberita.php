@@ -26,14 +26,13 @@ if (!isset($_SESSION['useremail'])) {
                         <?php
                         include("includes/config.php");
 
-                        // Ambil Data Lama
                         if (isset($_GET['id'])) {
                             $beritaID = $_GET['id'];
                             $query_edit = mysqli_query($conn, "SELECT * FROM berita WHERE beritaID = '$beritaID'");
                             $row_edit = mysqli_fetch_array($query_edit);
                         }
 
-                        // --- UPDATE DATA ---
+    
                         if (isset($_POST["Ubah"])) {
                             $id_lama = $_POST['beritaID'];
                             $kategoriID = $_POST['kategoriID'];
@@ -42,13 +41,13 @@ if (!isset($_SESSION['useremail'])) {
                             $beritaTgl = $_POST['beritaTgl'];
                             $file_lama = $_POST['fileLama'];
 
-                            // Cek File Baru
+            
                             $namaFileBaru = $_FILES['beritaFoto']['name'];
                             $lokasiFile = $_FILES['beritaFoto']['tmp_name'];
 
                             if (!empty($namaFileBaru)) {
                                 $folderTujuan = "dokumen/" . $namaFileBaru;
-                                // Hapus file lama fisik
+                      
                                 if (!empty($file_lama) && file_exists("dokumen/" . $file_lama)) {
                                     unlink("dokumen/" . $file_lama);
                                 }
